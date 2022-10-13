@@ -1,0 +1,11 @@
+.active-btn{
+    border: 2px solid;
+    padding: 10px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    
+    &:hover {
+        cursor: pointer;
+    }
+}
