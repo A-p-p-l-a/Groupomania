@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Routes from './components/Routes/index';
-import { UidContext } from "./components/AppContext";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUser } from "./actions/user.actions";
 
 const App = () => {
-  const [uid, setUid] = useState(null);
-  
+
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -16,19 +17,20 @@ const App = () => {
         withCredentials: true,
       })
         .then((res) => {
-          setUid(res.data);
+          if (res.data) dispatch(getUser(res.data));
         })
         .catch((err) => console.log("Pas de token"));
     };
     fetchToken();
 
     
-  }, [uid]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   return (
-    <UidContext.Provider value={uid}>
+    
       <Routes/>
-    </UidContext.Provider>
+    
   );
 };
 

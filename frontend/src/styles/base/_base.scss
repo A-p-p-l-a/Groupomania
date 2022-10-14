@@ -1,0 +1,19 @@
+html, body, div, span, 
+h1, h2, h3, h4, h5, h6, p, a, 
+img, li, ul, strong, form, footer, header, 
+menu, nav, section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	list-style-type: none;
+    
+}
+
+body {
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}

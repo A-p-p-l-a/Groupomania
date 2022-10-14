@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Newfeed from './../../pages/Newfeed';
+import Home from './../../pages/Home';
 import Profil from './../../pages/Profil';
+import Navbar from './../Navbar';
 
 const index = () => {
     return (
         <Router>
+            <Navbar />
             <Switch>
-                <Route exact path="/" component={Newfeed} />
+                <Route exact path="/" component={Home} />
                 <Route exact path="/profil" component={Profil} />
                 <Redirect to="/"/>
             </Switch>
