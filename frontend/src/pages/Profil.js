@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useContext } from "react";
 import Log from "../components/Log"
-
+import { UidContext } from "../components/AppContext";
 import UpdateProfil from "../components/Profil/UpdateProfil";
-import { useSelector } from 'react-redux';
+
 
 const Profil = () => {
 
-    const user = useSelector((state) => state.user);
+    const uid = useContext(UidContext);
 
     return (
         <div className="identification-page">
 
-            {user ? (
+            {uid ? (
                 <UpdateProfil />
             ) : (
                 <div className="log-container">

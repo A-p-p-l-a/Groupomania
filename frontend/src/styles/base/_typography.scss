@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Gentleman";
+    src: url("../../font/gentlemanregular.eot") format("eot");
+  }
+
+body, input, button{
+    color: black;
+    font-size: 18px;
+    font-family: "Gentleman";
+    
+    a{
+
+        &:link {
+            color: black;
+        }
+        &:visited {
+            color: black;
+        }
+        &:hover {
+            color: $colour-secondary;
+        }
+        &:active {
+            color: $colour-secondary;
+        }
+
+    }
+    
+    textarea {
+        color: black;
+        outline: none;
+        
+        &::placeholder {
+            color: black;
+        }
+    }
+
+
+}

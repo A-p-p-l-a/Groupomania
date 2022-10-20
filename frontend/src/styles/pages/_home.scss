@@ -1,16 +1,112 @@
-.card-container{
-    display: flex;
-    align-items: flex-start;
-    border: 2px solid;
+.connection-form {
     margin: 20px;
-}
+    background: $colour-secondary;
+    border-radius: 10px;
+    padding: 20px;
 
-.card-left{
-    img{
-        height:150px;
+    ul {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+
+      li {
+        cursor: pointer;
+        border-radius: 20px;
+        padding: 12px 14px;
+        transition: .2s;
+        margin: 0 8px;
+      }
+      .active-btn {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: underline;
+        }
+      }
+      li:not(.active-btn) {
+        &:hover {
+          transform: translateX(3px)
+        }
+      }
     }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      input {
+        padding: 10px 14px;
+        margin: 0;
+        font-size: 1.2rem;
+        font-family: blue;
+        border-radius: 25px;
+
+        &:focus {
+          box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
+        }
+      }
+      input[type=submit] {
+        padding: 14px 14px;
+        border-radius: 20px;
+      }
+    }
+  }
+
+.post-form-preview{
+  margin-top: 20px;
+  .card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .user-info{
+      display: flex;
+      align-items: center;
+      img{
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+      }
+  }
+  }
+  
 }
 
-.card-right{
-    flex-direction: column
+.post-container{
+    background-color: $colour-secondary;
+    margin: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    .post-form{
+        display: flex;
+
+        #user-img{
+            width: 40px;
+            height: 40px;
+            object-fit: scale-down;
+            border-radius: 50%;
+            background-color: $colour-secondary-dark;
+        }
+        .message-decoration {
+            margin-left: 10px;
+            border-radius: 40px;
+            background-color: white;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+        text-align: center;
+            textarea{
+                width: 100%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                height: auto;
+                background-color: white;
+                padding: 0px 0px 0px 0px;
+                resize: none;
+
+            }
+        }
+        
+
+    }
 }

@@ -1,5 +1,5 @@
 .active-btn{
-    border: 2px solid;
+
     padding: 10px;
     width: 100px;
     display: flex;
@@ -8,6 +8,8 @@
     &:hover {
         cursor: pointer;
     }
+    
+
 }
 
 .logout{
@@ -15,3 +17,35 @@
         cursor: pointer;
     }
 }
+
+
+
+.like-container{
+    display: flex;
+    
+}
+
+input[type=button], input[type=submit], button{
+    background-color: $colour-secondary;
+    border: none;
+    color: $colour-primary;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    &:hover{
+        background-color: $colour-tertiary;
+        color: white;
+    }
+  }
+
+  .form-container{
+    li {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+    }
+  }

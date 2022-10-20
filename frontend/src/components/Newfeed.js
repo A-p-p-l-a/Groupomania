@@ -7,15 +7,28 @@ import { isEmpty } from "./Utils";
 const Newfeed = () => {
     
     const [loadPost, setLoadPost] = useState(true);
+    const [count, setCount] = useState(10);
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.post);
 
+    const loadMore = () => {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
+          setLoadPost(true);
+        }
+      }
+
     useEffect(() => {
         if (loadPost) {
-          dispatch(getPosts());
+          dispatch(getPosts(count));
           setLoadPost(false);
+          setCount(count + 10);
         }
-    }, [loadPost, dispatch]);
+
+        window.addEventListener('scroll', loadMore);
+        return () => window.removeEventListener('scroll', loadMore);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loadPost]);
 
     return (
         <div className="newfeed-container">

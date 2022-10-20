@@ -1,5 +1,11 @@
+@import "./utils/variables";
 @import "./base/base";
+@import "./base/typography";
 @import "./components/buttons";
+@import "./components/icons";
 @import "./layouts/navbar";
+@import "./layouts/connectionform";
+@import "./layouts/postcard";
+@import "./layouts/commentcart";
 @import "./pages/home";
 @import "./pages/profil";

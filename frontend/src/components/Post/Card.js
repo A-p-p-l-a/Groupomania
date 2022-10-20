@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { isEmpty, datePostParser } from "../Utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LikeButton from './LikeButton';
+import CardComments from './CardComments';
+import { updatePost, deletePost } from "../../actions/post.actions";
+
+
 
 const Card = ({post}) => {
     
     const [isLoading, setIsLoading] = useState(true);
+    const [isUpdated, setIsUpdated] = useState(false);
+    const [textUpdate, setTextUpdate] = useState(null);
+    const [showComments, setShowComments] = useState(false);
     const usersData = useSelector((state) => state.users);
+    const userData = useSelector((state) => state.user);
+    const dispatch = useDispatch();
    
+    const updateItem = () => {
+        if (textUpdate) {
+          dispatch(updatePost(post._id, textUpdate));
+        }
+        setIsUpdated(false);
+    };
+
+    const deleteQuote = () => dispatch(deletePost(post._id));
 
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
     }, [usersData]);
 
+ 
     return (
         <li className="card-container" key={post._id}>
             {isLoading ? (
@@ -19,16 +38,16 @@ const Card = ({post}) => {
             ) : (
                 <>
                     <div className="card-left">
-                        <img src={
-                            !isEmpty(usersData[0]) && usersData.map((user) => {
-                                if (user._id === post.posterId) return user.picture;
-                                else return null;
-                            })
-                            .join("")
-                        }
-                        alt="poster-pic"
-                        />
                         <div className="pseudo">
+                            <img src={
+                                !isEmpty(usersData[0]) && usersData.map((user) => {
+                                    if (user._id === post.posterId) return user.picture;
+                                    else return null;
+                                })
+                                .join("")
+                            }
+                            alt="poster-pic"
+                            />
                             <h3>
                                 {!isEmpty(usersData[0]) && usersData.map((user) => {
                                     if (user._id === post.posterId) return user.pseudo;
@@ -38,20 +57,87 @@ const Card = ({post}) => {
                             </h3>
                         </div>
                         <div className="card-header">  
-                            <h2>Poster le: </h2><span>{datePostParser(post.createdAt)}</span>        
+                            <span>{datePostParser(post.createdAt)}</span>        
                         </div>
                     </div>
                     <div className="card-right">
-                        
-                        <p>{post.message}</p>
-                        {post.picture && (
-                            <img src={post.picture} alt="card-pic" className="card-pic" />
-                        )}
+                        <div className="message-post">
+                            {isUpdated === false && <p>{post.message}</p>}
+                            {isUpdated && (
+                            <div className="update-post">
+                                <textarea defaultValue={post.message}
+                                    onChange={(e) => setTextUpdate(e.target.value)}
+                                />
+                                <div className="button-container">
+                                <button className="btn" onClick={updateItem}>
+                                    Valider modification
+                                </button>
+                                </div>
+                            </div>
+                            )}
+                            {post.picture && (
+                                <img src={post.picture} alt="card-pic" className="card-pic" />
+                            )}
+                            
+                        </div>
+                    <div className="card-footer">
+                        <div className="card-footer-icon">            
+                            <div className="comment-icon">
+                                <div className="icon">
+                                    <img  onClick={() => setShowComments(!showComments)} src="/img/icons/message-regular.svg" alt="comment"/>
+                                </div>
+                                <span>{post.comments.length}</span>
+                            </div>
+                            <div className="like-icon">
+                                <LikeButton post={post} />
+                            </div>
+                            {
+                                (() => {
+                                    if(userData._id === post.posterId) {
+                                            return (
+                                                <div className="button-container">
+                                                    <div className="icon" onClick={() => setIsUpdated(!isUpdated)}>
+                                                        <img src="./img/icons/pen-to-square-regular.svg" alt="edit" />
+                                                    </div>
+                                                    <div className="icon"
+                                                        onClick={() => {
+                                                            if (window.confirm("Voulez-vous supprimer cet article ?")) {
+                                                            deleteQuote();
+                                                            }
+                                                        }}
+                                                    >
+                                                        <img src="./img/icons/trash-can-regular.svg" alt="trash" />
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else if(userData._id === process.env.REACT_APP_ADMIN_RIGHT) {
+                                            return (
+                                                <div className="button-container">
+                                                    <div className="icon" onClick={() => setIsUpdated(!isUpdated)}>
+                                                        <img src="./img/icons/pen-to-square-regular.svg" alt="edit" />
+                                                    </div>
+                                                    <div className="icon"
+                                                        onClick={() => {
+                                                            if (window.confirm("Voulez-vous supprimer cet article ?")) {
+                                                            deleteQuote();
+                                                            }
+                                                        }}
+                                                    >
+                                                        <img src="./img/icons/trash-can-regular.svg" alt="trash" />
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                })()  
+                            }
+                        </div>
+                        {showComments && <CardComments post={post} />}
                     </div>
+                </div>
+                    
                 </>
             )}
         </li>
     );
 };
-
 export default Card;

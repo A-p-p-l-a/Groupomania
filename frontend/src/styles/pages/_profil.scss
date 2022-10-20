@@ -1,5 +1,47 @@
 .profil-container{
-    img{
-        height:150px;
+    background-color: $colour-secondary;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h1 {
+        padding-bottom: 30px;
     }
+    .update-container{
+        display: flex;
+        
+        .left-part{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            
+            h3{
+                padding-bottom: 30px;
+            }
+            img{
+                height:200px;
+                width: 200px;
+                background-color: $colour-secondary-dark;
+                object-fit: scale-down;
+                border-radius: 50%;
+                margin-bottom: 30px;
+            }
+        }
+        .right-part{
+            margin-left: 20px;
+            .bio-update{
+                h3{
+                    margin-bottom: 20px;
+                }
+                p{
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+    
 }

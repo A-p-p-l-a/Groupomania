@@ -88,59 +88,67 @@ module.exports.deletePost = (req, res) => {
     });
 };
 
-module.exports.likePost = async (req, res) => {
+module.exports.likePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID inconnu : " + req.params.id);
+    return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findByIdAndUpdate(
+    PostModel.findByIdAndUpdate(
       req.params.id,
       {
         $addToSet: { likers: req.body.id },
       },
-      { new: true })
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
+      { new: true },
+      (err,docs) => {
+        if(err) return res.status(400).send({ message: err });
+      }
+    );
 
-    await UserModel.findByIdAndUpdate(
+    UserModel.findByIdAndUpdate(
       req.body.id,
       {
         $addToSet: { likes: req.params.id },
       },
-      { new: true })
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(400).send(err);
-  }
+      { new: true },
+      (err,docs) => {
+        if(!err) res.send(docs)
+        else return res.status(400).send({ message: err });
+      }
+    );      
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 };
 
-module.exports.unlikePost = async (req, res) => {
+module.exports.unlikePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID inconnu : " + req.params.id);
+    return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findByIdAndUpdate(
+    PostModel.findByIdAndUpdate(
       req.params.id,
       {
         $pull: { likers: req.body.id },
       },
-      { new: true })
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
-
-    await UserModel.findByIdAndUpdate(
+      { new: true },
+      (err,docs) => {
+        if(err) return res.status(400).send({ message: err });
+      }
+    );
+    UserModel.findByIdAndUpdate(
       req.body.id,
       {
         $pull: { likes: req.params.id },
       },
-      { new: true })
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(400).send(err);
-  }
-
+      { new: true },
+      (err,docs) => {
+        if(!err) res.send(docs)
+        else return res.status(400).send({ message: err });
+      }
+    );      
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 };
 
 

@@ -1,0 +1,62 @@
+.card-container{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: $colour-secondary;
+    border-radius: 10px;
+
+    .card-left{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        
+        .pseudo{
+            display: flex;
+            align-items: center;
+            img{
+                margin-right: 20px;
+                height:40px;
+                width: 40px;
+                object-fit: scale-down;
+                border-radius: 50%;
+            }
+        }
+        
+    }
+
+    .card-right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px 0;
+        margin: 10px 40px 10px 40px;
+        .message-post{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            .card-pic{
+                margin: auto;
+                height:500px;
+                width: 500px;
+                object-fit: scale-down;
+            }
+        }
+        .card-footer{
+            .card-footer-icon{
+                display: flex;
+                align-items: baseline;
+                justify-content: center;
+                .button-container{
+                    display: flex;
+                    align-items: baseline;
+                }
+            }
+            
+            
+        }
+    }
+    
+
+}

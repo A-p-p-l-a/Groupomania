@@ -1,0 +1,24 @@
+.comments-container{
+    border-top: 2px solid;
+    margin-top: 20px;
+    
+    .comment-container{
+        margin-top: 20px;
+        .left-part{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            .user-info{
+                display: flex;
+                align-items: center;
+                img{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                }
+            }
+            
+        }
+    }
+}

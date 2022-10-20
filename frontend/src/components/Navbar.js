@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
 const Navbar = () => {
+  const uid = useContext(UidContext);
+  const userData = useSelector((state) => state.user);
 
-    const user = useSelector((state) => state.user);
-    
-
-
-    return (
-        <nav>
+  return (
+    <nav>
       <div className="nav-container">
         <div className="logo">
           <NavLink exact to="/">
@@ -20,12 +18,12 @@ const Navbar = () => {
             </div>
           </NavLink>
         </div>
-        {user ? (
+        {uid ? (
           <ul>
             <li></li>
             <li className="welcome">
               <NavLink exact to="/profil">
-                <h5>{user.pseudo}</h5>
+                <h5>Bienvenue {userData.pseudo}</h5>
               </NavLink>
             </li>
             <Logout />
@@ -35,14 +33,16 @@ const Navbar = () => {
             <li></li>
             <li>
               <NavLink exact to="/profil">
-                <img src="" alt="login"/>
+                <div className="icon">
+                  <img src="./img/icons/right-to-bracket-solid.svg" alt="login"/>
+                </div>
               </NavLink>
             </li>
           </ul>
         )}
       </div>
     </nav>
-    );
+  );
 };
 
 export default Navbar;

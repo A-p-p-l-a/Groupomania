@@ -5,7 +5,7 @@ import './styles/index.scss';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import rootReducer from "./reducers/index";
 import { getUsers } from "./actions/users.actions";
 import { getPosts } from "./actions/post.actions";
 //devtool

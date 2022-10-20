@@ -28,7 +28,7 @@ const UpdateProfil = () => {
                 </div>
                 <div className="right-part">
                     <div className="bio-update">
-                        <h3>Bio</h3>
+                        <h3>Bio:</h3>
                         {updateForm === false && (
                             <>
                                 <p onClick={() => setUpdateForm(!updateForm)}>{userData.bio}</p>

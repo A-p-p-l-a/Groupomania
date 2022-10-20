@@ -1,0 +1,26 @@
+.icon {
+	img{
+    height: 20px;
+	width: 20px;}
+	&:hover{
+		cursor: pointer;
+	}
+}
+
+.like-icon{
+	display: flex;
+	align-items: baseline;
+	margin-right: 50px; 
+}
+
+.comment-icon{
+    display: flex;
+    margin-right: 50px;
+
+}
+
+.button-container{
+	.icon{
+		margin-right: 50px;
+	}
+}

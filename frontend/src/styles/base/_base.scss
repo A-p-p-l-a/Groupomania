@@ -1,7 +1,7 @@
 html, body, div, span, 
 h1, h2, h3, h4, h5, h6, p, a, 
 img, li, ul, strong, form, footer, header, 
-menu, nav, section {
+menu, nav, textarea, section {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -9,11 +9,14 @@ menu, nav, section {
 	font: inherit;
 	vertical-align: baseline;
 	list-style-type: none;
-    
+	text-decoration: none;
+    box-shadow: none;
 }
 
 body {
 	max-width: 1440px;
 	width: 100%;
 	margin: 0 auto;
+	background-color: white;
 }
+
