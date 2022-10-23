@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UidContext } from "../components/AppContext";
-import NewPost from "../components/Post/NewPost"
+import NewPost from "../components/NewPost"
 import Newfeed from "../components/Newfeed";
 import Log from "../components/Log";
 

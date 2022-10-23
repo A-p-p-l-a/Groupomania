@@ -32,18 +32,33 @@
         justify-content: space-between;
         padding: 20px 0;
         margin: 10px 40px 10px 40px;
+        
         .message-post{
             display: flex;
             flex-direction: column;
             margin-bottom: 40px;
+            p{
+                word-wrap: break-word; 
+            }
             .card-pic{
-                margin: auto;
+                margin: 20px auto;
                 height:500px;
                 width: 500px;
                 object-fit: scale-down;
             }
+
+            @media screen and (max-width: 640px) {
+                .card-pic{
+                    height:200px;
+                    width: 200px;
+                }
+            }
         }
+
+        
         .card-footer{
+            border-top: 2px solid;
+            padding-top: 20px;
             .card-footer-icon{
                 display: flex;
                 align-items: baseline;

@@ -38,12 +38,20 @@ Dans le repertoire Groupomania, entrez la ligne :
  
  pour installer toutes les dépendences du back,
  puis 
- >nodemon server
+ >npm start
  
  pour executer le serveur (qui sera sur le port 5000)
 
 *Gardez ce terminal ouvert.*
 
+ ## explication fichier .env du backend
+
+    Dans le dossier backend, il doit y avoir un fichier .env qui comporte:
+    PORT=5000
+    CLIENT_URL=http://localhost:3000
+    DB_USER= utilisateur du mongodb server
+    DB_PASSWORD= mot de passe du mongodb server
+    TOKEN_SECRET= ajoutez votre token
  
  A présent ourez un second terminal pour le **frontend** :
  Dans le repertoire Groupomania, entrez la ligne : 
@@ -60,8 +68,10 @@ Dans le repertoire Groupomania, entrez la ligne :
  
  *Gardez ce terminal ouvert.*
  
-# explication fichier .env
- 
+ ## explication fichier .env du frontend
+ Dans le dossier frontend, il doit y avoir un fichier .env qui comporte:
+    REACT_APP_API_URL= URL du de l'API
+    REACT_APP_ADMIN_RIGHT= l'ID de l'administrateur
  
  ## Tout est bon ! 
  Vous pouvez dès à présent vous rendre à l'adresse "http://localhost:3000" 

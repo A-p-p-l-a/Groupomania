@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { UidContext } from "./AppContext";
-import Logout from "./Log/Logout";
+import { UidContext } from "../AppContext";
+import Logout from "../Logout";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const uid = useContext(UidContext);
@@ -34,7 +36,7 @@ const Navbar = () => {
             <li>
               <NavLink exact to="/profil">
                 <div className="icon">
-                  <img src="./img/icons/right-to-bracket-solid.svg" alt="login"/>
+                  <FontAwesomeIcon icon={faSignInAlt} />
                 </div>
               </NavLink>
             </li>

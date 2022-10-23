@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, getPosts } from "../../actions/post.actions";
 import { isEmpty, timestampParser } from "../Utils";
-import EditDeleteComment from "./EditDeleteComment";
+import EditDeleteComment from "../EditDeleteComment";
 
 
 
@@ -17,7 +17,7 @@ const CardComments = ({ post, comment }) => {
     e.preventDefault();
 
     if (text) {
-      dispatch(addComment(post._id, userData._id, text, userData.pseudo))
+        dispatch(addComment(post._id, userData._id, text, userData.pseudo))
         .then(() => dispatch(getPosts()))
         .then(() => setText(""));
     }
@@ -55,7 +55,7 @@ const CardComments = ({ post, comment }) => {
             <form action="" onSubmit={handleComment} className="comment-form">
                 <input type="text" name="text" onChange={(e) => setText(e.target.value)} value={text} placeholder="Laisser un commentaire"/>
                 <br />
-                <input type="submit" value="Envoyer" />
+                <input type="submit" value="Publier" />
             </form>
         )}
     </div>

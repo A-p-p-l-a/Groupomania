@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UploadImg from "./UploadImg";
+import UploadImg from "../UploadImg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
 
@@ -9,6 +9,7 @@ const UpdateProfil = () => {
     const [bio, setBio] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const userData = useSelector((state) => state.user);
+    const error = useSelector((state) => state.error.userError);
     const dispatch = useDispatch();
 
     const handleUpdate = () => {
@@ -24,7 +25,8 @@ const UpdateProfil = () => {
                     <h3>Photo de profil</h3>
                     <img src={userData.picture} alt="user-pic" />
                     <UploadImg />
-                    
+                    <p>{error.maxSize}</p>
+                    <p>{error.format}</p>
                 </div>
                 <div className="right-part">
                     <div className="bio-update">

@@ -1,10 +1,10 @@
-import {DELETE_COMMENT, DELETE_POST, EDIT_COMMENT, GET_POSTS, LIKE_POST, UNLIKE_POST, UPDATE_POST,} from "../actions/post.actions";
+import {DELETE_COMMENT, DELETE_POST, EDIT_COMMENT, GET_ALL_POSTS, LIKE_POST, UNLIKE_POST, UPDATE_POST,} from "../actions/post.actions";
   
   const initialState = {};
 
   export default function postReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_POSTS:
+        case GET_ALL_POSTS:
             return action.payload;
         case LIKE_POST:
           return state.map((post) => {

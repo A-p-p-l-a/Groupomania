@@ -37,36 +37,68 @@
         padding: 10px 14px;
         margin: 0;
         font-size: 1.2rem;
-        font-family: blue;
         border-radius: 25px;
-
-        &:focus {
-          box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
-        }
+        border: none;
+        
       }
       input[type=submit] {
         padding: 14px 14px;
         border-radius: 20px;
       }
     }
+    .form-container{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
 .post-form-preview{
   margin-top: 20px;
-  .card-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  
+  .card-container{
+    word-wrap: break-word; 
 
-    .user-info{
+    .card-header{
       display: flex;
       align-items: center;
-      img{
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .user-info{
+        display: flex;
+        align-items: center;
+        img{
+          margin-right: 20px ;
           height: 40px;
           width: 40px;
           border-radius: 50%;
+        }
       }
+    }
+    .content{
+      display: flex;
+      flex-direction: column;
+      img{
+        margin: 20px auto;
+        height: 500px;
+        width: 500px;
+        object-fit: scale-down;
+      }
+      @media screen and (max-width: 640px) {
+        img{
+            height:200px;
+            width: 200px;
+        }
+    }
+      
+    }
+    
   }
+  .footer-form{
+    .btn-send{
+      display: flex;
+      justify-content: center;
+    }
   }
   
 }
@@ -88,25 +120,35 @@
         }
         .message-decoration {
             margin-left: 10px;
-            border-radius: 40px;
-            background-color: white;
-            padding: 10px;
             width: 100%;
-            display: flex;
-        text-align: center;
+
             textarea{
                 width: 100%;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                height: auto;
+                height: 20px;
                 background-color: white;
-                padding: 0px 0px 0px 0px;
+                padding: 10px 0 10px 5px;
                 resize: none;
+                border-radius: 25px;
+                overflow: hidden;
 
             }
         }
-        
-
+    }
+    .icon{
+      position: relative;
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      margin-left: 80px;
+      margin-top: 20px;
+      
+      input {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        transform: translate(0px, -3px);
+        opacity: 0;
+        cursor: pointer;
+      }
     }
 }

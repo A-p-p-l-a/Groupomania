@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { isEmpty, timestampParser } from "../Utils";
 import { NavLink } from "react-router-dom";
 import { addPost, getPosts } from "../../actions/post.actions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
 
 const NewPostForm = () => {
   const [message, setMessage] = useState("");
@@ -34,12 +36,9 @@ const NewPostForm = () => {
 
   const cancelPost = () => {
     setMessage("");
-    setPostPicture("");
+    setPostPicture(null);
     setFile("");
   };
-
-
-
 
   return (
     <div className="post-container">
@@ -53,49 +52,48 @@ const NewPostForm = () => {
           <textarea name="message" id="message" placeholder="Quoi de neuf ?"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
-            />
+          />
         </div>
       </div>
-          <div className="post-form-preview">
-            {message || postPicture > 20 ? (
-              <li className="card-container">
-                  <div className="card-header">
-                    <div className="user-info">
-                      <img src={userData.picture} alt="user-pic" />
-                      <div className="pseudo">
-                        <h3>{userData.pseudo}</h3>
-                      </div>
-                    </div>
-                    <span>{timestampParser(Date.now())}</span>
-                  </div>
-                  <div className="content">
-                    <p>{message}</p>
-                    <img src={postPicture} alt="" />
-                  </div>
-
-              </li>
-            ) : null}
-            <div className="footer-form">
-              <div className="icon">
-                <img src="./img/icons/image-regular.svg" alt="img" />
-                <input type="file" id="file-upload" name="file" accept=".jpg, .jpeg, .png"
-                    onChange={(e) => handlePicture(e)}
-                />
+      <div className="icon">
+        <FontAwesomeIcon icon={faImage} />
+        <input type="file" id="file-upload" name="file" accept=".jpg, .jpeg, .png" onChange={(e) => handlePicture(e)} />
+      </div>
+      {!isEmpty(error.format) && <p>{error.format}</p>}
+      {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
+      <div className="post-form-preview">
+        {message || postPicture ? (
+          <li className="card-container">
+            <div className="card-header">
+              <div className="user-info">
+                <img src={userData.picture} alt="user-pic" />
+                <div className="pseudo">
+                  <h3>{userData.pseudo}</h3>
+                </div>
               </div>
-              {!isEmpty(error.format) && <p>{error.format}</p>}
-              {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
-              <div className="btn-send">
-                {message || postPicture > 20 ? (
-                  <button className="cancel" onClick={cancelPost}>
-                    Annuler message
-                  </button>
-                ) : null}
-                <button className="send" onClick={handlePost}>
-                  Envoyer
-                </button>
-              </div>
+              <span>{timestampParser(Date.now())}</span>
             </div>
+            <div className="content">
+              <p>{message}</p>
+              {postPicture!==null ? (
+                <img src={postPicture} alt="post-pic" className="post-pic"/>
+              ) : null}
+            </div>
+          </li>
+        ) : null}
+        <div className="footer-form">
+          <div className="btn-send">
+            {message || postPicture ? (
+              <button className="cancel" onClick={cancelPost}>
+                Annuler message
+              </button>
+            ) : null}
+            <button className="send" onClick={handlePost}>
+              Publier
+            </button>
           </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteComment, editComment } from "../../actions/post.actions";
 import { UidContext } from "../AppContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 const EditDeleteComment = ({ comment, postId }) => {
   const [isAuthor, setIsAuthor] = useState(false);
@@ -24,7 +26,7 @@ const EditDeleteComment = ({ comment, postId }) => {
 
   useEffect(() => {
     const checkAuthor = () => {
-      if (uid === comment.commenterId) {
+      if (uid === comment.commenterId || uid === process.env.REACT_APP_ADMIN_RIGHT ) {
         setIsAuthor(true);
       }
     };
@@ -36,27 +38,29 @@ const EditDeleteComment = ({ comment, postId }) => {
       {isAuthor && edit === false && (
         <span onClick={() => setEdit(!edit)}>
           <div className="icon">
-            <img src="./img/icons/pen-to-square-regular.svg" alt="edit-comment" />
+            <FontAwesomeIcon icon={faEdit} />
           </div>
         </span>
       )}
       {isAuthor && edit && (
         <form action="" onSubmit={handleEdit} className="edit-comment-form">
           <label htmlFor="text" onClick={() => setEdit(!edit)}>
-            Editer
+            Editer:
           </label>
           <br />
-          <input type="text" name="text" onChange={(e) => setText(e.target.value)} defaultValue={comment.text} />
+          <div>
+            <input type="text" name="text" onChange={(e) => setText(e.target.value)} defaultValue={comment.text} />
+            <span onClick={() => {
+                  if (window.confirm("Voulez-vous supprimer ce commentaire ?")) { handleDelete();}
+                }}
+              >
+                <div className="icon">
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </div>
+              </span>
+            </div>
           <br />
           <div className="btn">
-            <span onClick={() => {
-                if (window.confirm("Voulez-vous supprimer ce commentaire ?")) { handleDelete();}
-              }}
-            >
-              <div className="icon">
-                <img src="./img/icons/trash-can-regular.svg" alt="delete" />
-              </div>
-            </span>
             <input type="submit" value="Valider modification" />
           </div>
         </form>

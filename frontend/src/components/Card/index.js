@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { isEmpty, datePostParser } from "../Utils";
 import { useDispatch, useSelector } from "react-redux";
-import LikeButton from './LikeButton';
-import CardComments from './CardComments';
+import LikeButton from '../LikeButton';
+import CardComments from '../CardComments';
 import { updatePost, deletePost } from "../../actions/post.actions";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  } from '@fortawesome/free-solid-svg-icons';
+import { faCommentAlt, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 const Card = ({post}) => {
     
@@ -83,8 +84,8 @@ const Card = ({post}) => {
                     <div className="card-footer">
                         <div className="card-footer-icon">            
                             <div className="comment-icon">
-                                <div className="icon">
-                                    <img  onClick={() => setShowComments(!showComments)} src="/img/icons/message-regular.svg" alt="comment"/>
+                                <div className="icon" onClick={() => setShowComments(!showComments)}>
+                                    <FontAwesomeIcon icon={faCommentAlt} />
                                 </div>
                                 <span>{post.comments.length}</span>
                             </div>
@@ -96,8 +97,8 @@ const Card = ({post}) => {
                                     if(userData._id === post.posterId) {
                                             return (
                                                 <div className="button-container">
-                                                    <div className="icon" onClick={() => setIsUpdated(!isUpdated)}>
-                                                        <img src="./img/icons/pen-to-square-regular.svg" alt="edit" />
+                                                    <div className="icon icon-space" onClick={() => setIsUpdated(!isUpdated)}>
+                                                        <FontAwesomeIcon icon={faEdit} />
                                                     </div>
                                                     <div className="icon"
                                                         onClick={() => {
@@ -106,15 +107,15 @@ const Card = ({post}) => {
                                                             }
                                                         }}
                                                     >
-                                                        <img src="./img/icons/trash-can-regular.svg" alt="trash" />
+                                                        <FontAwesomeIcon icon={faTrashAlt} />
                                                     </div>
                                                 </div>
                                             )
                                         } else if(userData._id === process.env.REACT_APP_ADMIN_RIGHT) {
                                             return (
                                                 <div className="button-container">
-                                                    <div className="icon" onClick={() => setIsUpdated(!isUpdated)}>
-                                                        <img src="./img/icons/pen-to-square-regular.svg" alt="edit" />
+                                                    <div className="icon icon-space" onClick={() => setIsUpdated(!isUpdated)}>
+                                                        <FontAwesomeIcon icon={faEdit} />
                                                     </div>
                                                     <div className="icon"
                                                         onClick={() => {
@@ -123,7 +124,7 @@ const Card = ({post}) => {
                                                             }
                                                         }}
                                                     >
-                                                        <img src="./img/icons/trash-can-regular.svg" alt="trash" />
+                                                        <FontAwesomeIcon icon={faTrashAlt} />
                                                     </div>
                                                 </div>
                                             )

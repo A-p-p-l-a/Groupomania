@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import SignInForm from "./SignInForm";
+import SignInForm from "../SignInForm";
 
 const SignUpForm = () => {
     const [formSubmit, setFormSubmit] = useState(false);
@@ -108,8 +108,8 @@ const SignUpForm = () => {
             />
             <div className="password-confirm error"></div>
             <br />
-            <input type="checkbox" id="terms" />
             <label htmlFor="terms">
+              <input type="checkbox" id="terms" />
               J'accepte les{" "}
               <a href="/" target="_blank" rel="noopener noreferrer">
                 conditions générales
