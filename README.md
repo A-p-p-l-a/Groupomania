@@ -46,7 +46,8 @@ Dans le repertoire Groupomania, entrez la ligne :
 
  ## explication fichier .env du backend
 
-    Dans le dossier backend, il doit y avoir un fichier .env qui comporte:
+   Dans le dossier backend, il doit y avoir un fichier .env qui comporte:
+    
     PORT=5000
     CLIENT_URL=http://localhost:3000
     DB_USER= utilisateur du mongodb server
@@ -69,7 +70,8 @@ Dans le repertoire Groupomania, entrez la ligne :
  *Gardez ce terminal ouvert.*
  
  ## explication fichier .env du frontend
- Dans le dossier frontend, il doit y avoir un fichier .env qui comporte:
+   Dans le dossier frontend, il doit y avoir un fichier .env qui comporte:
+ 
     REACT_APP_API_URL= URL du de l'API
     REACT_APP_ADMIN_RIGHT= l'ID de l'administrateur
  
