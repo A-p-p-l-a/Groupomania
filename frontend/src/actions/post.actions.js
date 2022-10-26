@@ -74,15 +74,15 @@ export const addPost = (data) => {
     };
   };
 
-  export const updatePost = (postId, message, picture) => {
+  export const updatePost = (postId, data) => {
     return (dispatch) => {
       return axios({
         method: "put",
         url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-        data: { message, picture },
+        data
       })
         .then((res) => {
-          dispatch({ type: UPDATE_POST, payload: { message, picture, postId } });
+          dispatch({ type: UPDATE_POST, payload: { postId } });
         })
         .catch((err) => console.log(err));
     };

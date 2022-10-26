@@ -58,25 +58,28 @@ module.exports.createPost = async (req, res) => {
 };
 
 module.exports.updatePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID inconnu : " + req.params.id);
+  console.log(req.params.id)
 
-  if (req.body.picture !== null) {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(404).send("ID inconnu : " + req.params.id);
+
+  if (req.file !== null) {
     try {
       if (
         req.file.detectedMimeType != "image/jpg" &&
         req.file.detectedMimeType != "image/png" &&
         req.file.detectedMimeType != "image/jpeg"
       )
-      throw Error("invalid file");
+        throw Error("invalid file");
 
       if (req.file.size > 500000) throw Error("max size");
-    } catch (err) {
+
+      } catch (err) {
+        console.log(err)
       const errors = uploadErrors(err);
-      return res.status(201).json({ errors });
+      return res.status(500).json({ errors });
     }
-    
-    fileName = req.params.id + ".jpg";
+    fileName = req.body.posterId + Date.now() + ".jpg";
 
     await pipeline(
       req.file.stream,
@@ -87,19 +90,23 @@ module.exports.updatePost = async (req, res) => {
   }
   
   const updatedRecord = {
-    message: req.body.message
+    message: req.body.message,
+  }
+
+  if(req.file) {
+    updatedRecord.picture = "./uploads/posts/" + fileName
   }
 
   PostModel.findByIdAndUpdate(
     req.params.id,
-    { $set: updatedRecord, picture: req.body.picture !== null ? "./uploads/posts/" + fileName : "" },
-    { new: true },
+    updatedRecord,
     (err, docs) => {
       if (!err) res.send(docs);
       else console.log("Erreur de mise a jour : " + err);
     }
   )
 };
+
 
 
 
