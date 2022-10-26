@@ -6,24 +6,38 @@ import CardComments from '../CardComments';
 import { updatePost, deletePost } from "../../actions/post.actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  } from '@fortawesome/free-solid-svg-icons';
-import { faCommentAlt, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faCommentAlt, faEdit, faTrashAlt, faImage } from '@fortawesome/free-regular-svg-icons';
 
 const Card = ({post}) => {
     
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
+    const [postPicture, setPostPicture] = useState(null);
+    const [file, setFile] = useState();
     const [showComments, setShowComments] = useState(false);
     const usersData = useSelector((state) => state.users);
     const userData = useSelector((state) => state.user);
     const dispatch = useDispatch();
    
-    const updateItem = () => {
-        if (textUpdate) {
-          dispatch(updatePost(post._id, textUpdate));
-        }
+
+    const updateItem = async() => {
+        if (textUpdate || postPicture) {
+            const data = new FormData();
+            data.append('posterId', userData._id);
+            data.append('message', textUpdate);
+            if (file) data.append("file", file);
+            
+            await dispatch(updatePost(post._id, textUpdate, postPicture ));
+      
+        } 
         setIsUpdated(false);
     };
+
+    const handlePicture = (e) => {
+        setPostPicture(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]);
+      }; 
 
     const deleteQuote = () => dispatch(deletePost(post._id));
 
@@ -70,14 +84,21 @@ const Card = ({post}) => {
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />
                                 <div className="button-container">
-                                <button className="btn" onClick={updateItem}>
-                                    Valider modification
-                                </button>
+                                    <div className="icon">
+                                        <FontAwesomeIcon icon={faImage} />
+                                        <input type="file" id="file-upload" name="file" accept=".jpg, .jpeg, .png" onChange={(e) => handlePicture(e)} />
+                                    </div>
+                                    <button className="btn" onClick={updateItem}>
+                                        Valider modification
+                                    </button>
                                 </div>
+                                
                             </div>
                             )}
                             {post.picture && (
-                                <img src={post.picture} alt="card-pic" className="card-pic" />
+                                <img src={post.picture} alt="card-pic" className="card-pic"
+                                onChange={(e) => setFile(e.target.files[0])}
+                                />
                             )}
                             
                         </div>
@@ -100,6 +121,10 @@ const Card = ({post}) => {
                                                     <div className="icon icon-space" onClick={() => setIsUpdated(!isUpdated)}>
                                                         <FontAwesomeIcon icon={faEdit} />
                                                     </div>
+                                                    
+
+
+
                                                     <div className="icon"
                                                         onClick={() => {
                                                             if (window.confirm("Voulez-vous supprimer cet article ?")) {

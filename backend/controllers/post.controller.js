@@ -57,17 +57,42 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
-module.exports.updatePost = (req, res) => {
+module.exports.updatePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID inconnu : " + req.params.id);
 
+  if (req.body.picture !== null) {
+    try {
+      if (
+        req.file.detectedMimeType != "image/jpg" &&
+        req.file.detectedMimeType != "image/png" &&
+        req.file.detectedMimeType != "image/jpeg"
+      )
+      throw Error("invalid file");
+
+      if (req.file.size > 500000) throw Error("max size");
+    } catch (err) {
+      const errors = uploadErrors(err);
+      return res.status(201).json({ errors });
+    }
+    
+    fileName = req.params.id + ".jpg";
+
+    await pipeline(
+      req.file.stream,
+      fs.createWriteStream(
+        `../frontend/public/uploads/posts/${fileName}`
+      )
+    );
+  }
+  
   const updatedRecord = {
     message: req.body.message
   }
 
   PostModel.findByIdAndUpdate(
     req.params.id,
-    { $set: updatedRecord },
+    { $set: updatedRecord, picture: req.body.picture !== null ? "./uploads/posts/" + fileName : "" },
     { new: true },
     (err, docs) => {
       if (!err) res.send(docs);
@@ -75,6 +100,8 @@ module.exports.updatePost = (req, res) => {
     }
   )
 };
+
+
 
 module.exports.deletePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))

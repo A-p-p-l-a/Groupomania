@@ -28,6 +28,10 @@
  
  
  ## Installation :
+
+ Pour ne pas avoir de problème avec les images, veuillez installer: 
+   Node.js 15.4.0
+
  Clonez le projet puis ouvrez un premier terminal pour le **backend** :
 
 Dans le repertoire Groupomania, entrez la ligne : 
@@ -69,7 +73,7 @@ Dans le repertoire Groupomania, entrez la ligne :
  *Gardez ce terminal ouvert.*
  
  ## explication fichier .env du frontend
- Dans le dossier frontend, il doit y avoir un fichier .env qui comporte:
+   Dans le dossier frontend, il doit y avoir un fichier .env qui comporte:
     REACT_APP_API_URL= URL du de l'API
     REACT_APP_ADMIN_RIGHT= l'ID de l'administrateur
  

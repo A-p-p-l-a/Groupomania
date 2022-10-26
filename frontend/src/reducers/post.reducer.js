@@ -32,6 +32,7 @@ import {DELETE_COMMENT, DELETE_POST, EDIT_COMMENT, GET_ALL_POSTS, LIKE_POST, UNL
               return {
                 ...post,
                 message: action.payload.message,
+                picture: action.payload.picture,
               };
             } else return post;
           });

@@ -16,6 +16,7 @@ const UploadImg = () => {
       data.append("file", file);
   
       dispatch(uploadPicture(data, userData._id));
+      console.log(data);
     };
 
     return (
