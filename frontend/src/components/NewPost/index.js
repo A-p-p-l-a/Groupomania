@@ -21,10 +21,10 @@ const NewPostForm = () => {
       data.append('message', message);
       if (file) data.append("file", file);
 
-      await dispatch(addPost(data));
-      dispatch(getPosts());
-      cancelPost();
-    } else {
+        await dispatch(addPost(data));
+        dispatch(getPosts());
+        cancelPost();
+      } else {
       alert("Veuillez entrer un message")
     }
   };
